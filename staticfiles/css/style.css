@@ -39,7 +39,7 @@ body {
   gap: 1rem;
 }
 .icon-button {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   border-radius: 50%;
   width: 2.5rem;
@@ -62,7 +62,7 @@ body {
   background: #fff;
   padding: 0.75rem;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 #searchForm.show {
   display: block;
@@ -100,7 +100,7 @@ body {
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
 }
 .card:hover {
@@ -276,33 +276,6 @@ body {
 
   .form-title {
     font-size: 1.25rem;
-    text-align: center;
-  }
+    text-align: cente
 }
-
-/* ─── Logo Styling ────────────────────────────────────────── */
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.navbar-logo {
-  height: 32px;
-  max-width: 160px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  transition: transform 0.2s ease-in-out;
-}
-
-.navbar-logo:hover {
-  transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-  .navbar-logo {
-    height: 28px;
-    max-width: 140px;
-  }
 }

@@ -4,10 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Admin Panel
     path('admin/', admin.site.urls),
-    path('', include('social.urls')),  # Includes all app routes
+
+    # App URLs
+    path('', include('social.urls')),
 ]
 
-# ✅ Serve media files (like uploaded images) in development
+# ✅ Serve media files in development mode only
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
