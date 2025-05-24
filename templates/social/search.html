@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Search – Socialfy{% endblock %}
+
+{% block content %}
+  <h2 class="page-title">Search Results</h2>
+
+  {# Check if there are any matching users #}
+  {% if results %}
+    {# Loop through matching users and display them in styled search cards #}
+    {% for u in results %}
+      <a href="{% url 'profile' u.username %}" class="card search-card">
+        <img src="{{ u.profile.profile_pic.url }}" alt="{{ u.username }}" class="search-avatar">
+        <span class="search-username">{{ u.username }}</span>
+      </a>
+    {% endfor %}
+  {% else %}
+    {# Fallback message if no users match #}
+    <div class="card">
+      <p>No users found for "{{ query }}".</p>
+    </div>
+  {% endif %}
+{% endblock %}

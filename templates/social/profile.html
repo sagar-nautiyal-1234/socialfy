@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}{{ user_profile.username }} – Socialfy{% endblock %}
+
+{% block content %}
+  <!-- Profile Card -->
+  <div class="card profile-overview" style="text-align: center;">
+    <img src="{{ user_profile.profile.profile_pic.url }}" alt="Avatar"
+         style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc; margin-bottom: 1rem;" />
+
+    <h2 class="profile-name">{{ user_profile.username }}</h2>
+    <p class="profile-bio">{{ user_profile.profile.bio }}</p>
+
+    <!-- Follower/Following Count -->
+    <p class="profile-stats">
+      <strong>{{ followers_count }}</strong> Followers |
+      <strong>{{ following_count }}</strong> Following
+    </p>
+
+    {% if user.username == user_profile.username %}
+      <!-- Edit Profile Button -->
+      <a href="{% url 'edit_profile' %}" class="btn primary" style="margin-top: 1rem;">✏️ Edit Profile</a>
+    {% else %}
+      <!-- Follow/Unfollow Button -->
+      <form action="{% url 'toggle_follow' user_profile.username %}" method="post" style="margin-top: 1rem;">
+        {% csrf_token %}
+        {% if is_following %}
+          <button type="submit" class="btn danger">Unfollow</button>
+        {% else %}
+          <button type="submit" class="btn primary">Follow</button>
+        {% endif %}
+      </form>
+    {% endif %}
+  </div>
+
+  <!-- Create Post Section -->
+  {% if user.username == user_profile.username %}
+    <div class="card" style="padding: 1rem; margin-top: 2rem; margin-bottom: 2rem;">
+      <h3 style="margin-bottom: 0.8rem;">📝 Create a Post</h3>
+      <form method="post" style="text-align: center;">
+        {% csrf_token %}
+        <textarea name="content"
+                  rows="3"
+                  placeholder="What's on your mind?"
+                  required
+                  style="width: 90%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; resize: vertical; margin-bottom: 1rem;"></textarea>
+        <br>
+        <button type="submit" class="btn primary">Post</button>
+      </form>
+    </div>
+  {% endif %}
+
+  <!-- Posts Section -->
+  <h3 class="section-title">Posts</h3>
+  {% if posts %}
+    {% for post in posts %}
+      <div class="card post-card" style="margin-bottom: 1rem;">
+        <p class="post-content">{{ post.content }}</p>
+        <p class="post-date" style="font-size: 0.9rem; color: #777;">
+          Posted on {{ post.created|date:"F j, Y, H:i" }}
+        </p>
+
+        {% if user.username == user_profile.username %}
+          <form action="{% url 'delete_post' post.id %}" method="post" style="margin-top: 0.5rem;">
+            {% csrf_token %}
+            <button type="submit" class="btn danger">🗑 Delete</button>
+          </form>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="card">
+      <p>No posts yet.</p>
+    </div>
+  {% endif %}
+{% endblock %}

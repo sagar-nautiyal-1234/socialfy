@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Socialfy{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/app.js' %}" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <!-- ✅ Logo only (no text beside it) -->
+    <a href="{% url 'home' %}" class="navbar-brand logo-link">
+      <img src="/media/logo/logo-transparent.png" alt="Socialfy Logo" class="navbar-logo">
+    </a>
+
+    <div class="navbar-links">
+      {% if user.is_authenticated %}
+      <div class="search-container">
+        <button id="toggleSearch" class="icon-button" aria-label="Search">🔍</button>
+
+        <!-- Hidden by default -->
+        <form id="searchForm" action="{% url 'search_users' %}" method="get" style="display: none;">
+          <input type="text" name="q" placeholder="Search username…" required>
+          <button type="submit">Go</button>
+        </form>
+      </div>
+
+      <a href="{% url 'profile' user.username %}" class="profile-link">
+        <img src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
+        <span>{{ user.username }}</span>
+      </a>
+
+      <!-- 🔒 Secure Logout via POST -->
+      <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn danger">Logout</button>
+      </form>
+
+      {% else %}
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'signup' %}" class="btn primary">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card-container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <!-- Toggle Search Form -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleButton = document.getElementById('toggleSearch');
+      const searchForm = document.getElementById('searchForm');
+
+      toggleButton.addEventListener('click', function () {
+        searchForm.style.display = searchForm.style.display === 'none' ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+/* ─── Base & Layout ───────────────────────────────────────── */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+  margin: 0;
+}
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.card-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* ─── Navbar ───────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1e40af;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.icon-button {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container {
+  position: relative;
+}
+#searchForm {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 3rem;
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+#searchForm.show {
+  display: block;
+}
+#searchForm input {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+#searchForm button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+}
+.profile-link img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ─── Cards ────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ─── Page Titles & Sections ───────────────────────────────── */
+.page-title,
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+/* ─── Post Card ───────────────────────────────────────────── */
+.post-card .post-author {
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+.post-card .post-content {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+  color: #1f2937;
+}
+.post-card .post-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+.like-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+/* ─── Form Cards ──────────────────────────────────────────── */
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #111827;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-weight: 500;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #111827;
+}
+.login-card,
+.signup-card,
+.create-post-card,
+.profile-card,
+.profile-overview {
+  max-width: 500px;
+  margin: 2.5rem auto;
+}
+
+/* ─── Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.btn.primary {
+  background: #2563eb;
+  color: #fff;
+}
+.btn.primary:hover {
+  background: #1e40af;
+}
+.btn.danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+/* ─── Search Card ─────────────────────────────────────────── */
+.search-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.search-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.search-username {
+  font-weight: 600;
+}
+
+/* ─── Responsive Layout ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  #searchForm {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    margin-top: 0.5rem;
+  }
+
+  .profile-link img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .search-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .search-avatar {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .login-card,
+  .signup-card,
+  .create-post-card,
+  .profile-card,
+  .profile-overview {
+    width: 90%;
+    margin: 2rem auto;
+  }
+
+  .form-title {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+}
+
+/* ─── Logo Styling ────────────────────────────────────────── */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  height: 32px;
+  max-width: 160px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .navbar-logo {
+    height: 28px;
+    max-width: 140px;
+  }
+}

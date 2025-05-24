@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}New Post – Socialfy{% endblock %}
+
+{% block content %}
+  <div class="card create-post-card">
+    <h2 class="form-title">New Post</h2>
+    <form method="post" class="post-form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_content">Your Thoughts</label>
+        {{ form.content }}
+      </div>
+      <button type="submit" class="btn primary">Post</button>
+    </form>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Home – Socialfy{% endblock %}
+
+{% block content %}
+  <h2 class="page-title">Recent Posts</h2>
+
+  {% if posts %}
+    {% for post in posts %}
+      <div class="card post-card">
+        <a href="{% url 'profile' post.author.username %}" class="post-author">
+          {{ post.author.username }}
+        </a>
+        <p class="post-content">{{ post.content }}</p>
+        <p class="post-date">
+          Posted on {{ post.created|date:"F j, Y H:i" }}
+        </p>
+
+        <!-- Like/Unlike Form -->
+        <form action="{% url 'like_post' post.id %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="like-btn" style="background: none; border: none; cursor: pointer; padding: 0; font-size: 1rem;">
+            {% if user in post.likes.all %}
+              💔 Unlike ({{ post.likes.count }})
+            {% else %}
+              👍 Like ({{ post.likes.count }})
+            {% endif %}
+          </button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="card">
+      <p>No posts yet.</p>
+    </div>
+  {% endif %}
+{% endblock %}
