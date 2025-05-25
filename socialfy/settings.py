@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-prd@qeub83bm^_%-st!gx*-*oilw(mifaf!vl*9h+u(6&m(0d9
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.31.72', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -72,19 +72,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Media files (user uploads)
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # 🔐 Authentication Redirects
-LOGIN_URL = '/login/'                  # Redirect if user not logged in
-LOGIN_REDIRECT_URL = '/'              # Redirect after login success
-LOGOUT_REDIRECT_URL = '/login/'       # Redirect after logout
+LOGIN_URL = '/login/'                # Redirect if not logged in
+LOGIN_REDIRECT_URL = '/'            # After login success
+LOGOUT_REDIRECT_URL = '/login/'     # ✅ After logout, go to login
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
