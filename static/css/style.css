@@ -12,6 +12,7 @@ body {
 }
 .card-container {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
@@ -43,6 +44,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .icon-button {
   background: rgba(255, 255, 255, 0.15);
@@ -59,6 +61,7 @@ body {
 }
 .search-container {
   position: relative;
+  width: 100%;
 }
 #searchForm {
   display: none;
@@ -77,6 +80,7 @@ body {
   padding: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
+  width: 70%;
 }
 #searchForm button {
   margin-left: 0.5rem;
@@ -119,6 +123,7 @@ body {
   font-size: 1.75rem;
   margin-bottom: 1rem;
   color: #111827;
+  text-align: center;
 }
 
 /* ─── Post Card ───────────────────────────────────────────── */
@@ -149,6 +154,7 @@ body {
   font-size: 1.5rem;
   margin-bottom: 1.25rem;
   color: #111827;
+  text-align: center;
 }
 .form-group {
   margin-bottom: 1.25rem;
@@ -186,6 +192,7 @@ body {
   text-decoration: none;
   border: none;
   cursor: pointer;
+  text-align: center;
 }
 .btn.primary {
   background: #2563eb;
@@ -233,8 +240,14 @@ body {
 
   .navbar-links {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
     gap: 0.75rem;
+  }
+
+  .navbar-links a,
+  .navbar-links form,
+  .icon-button {
     width: 100%;
   }
 
@@ -244,13 +257,11 @@ body {
 
   .form-group input,
   .form-group textarea {
-    width: 100%;
     font-size: 1rem;
   }
 
   .btn {
     width: 100%;
-    text-align: center;
   }
 
   #searchForm {
@@ -283,10 +294,5 @@ body {
   .profile-overview {
     width: 90%;
     margin: 2rem auto;
-  }
-
-  .form-title {
-    font-size: 1.25rem;
-    text-align: center;
   }
 }
