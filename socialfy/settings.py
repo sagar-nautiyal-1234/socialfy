@@ -41,6 +41,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',  # ✅ Added media context processor
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -77,14 +78,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Media files
+# Media files (✅ for background images etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # 🔐 Authentication Redirects
-LOGIN_URL = '/login/'                # Redirect if not logged in
-LOGIN_REDIRECT_URL = '/'            # After login success
-LOGOUT_REDIRECT_URL = '/login/'     # ✅ After logout, go to login
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

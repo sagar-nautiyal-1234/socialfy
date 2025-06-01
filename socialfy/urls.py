@@ -5,17 +5,17 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView  # ✅ Import LogoutView
 
 urlpatterns = [
-    # Admin Panel
+    # 🛠 Admin Panel
     path('admin/', admin.site.urls),
 
-    # App URLs
+    # 🌐 App URLs
     path('', include('social.urls')),
 
-    # ✅ Logout using Django's built-in view
+    # 🔒 Logout View (built-in)
     path('logout/', LogoutView.as_view(), name='logout'),
 ]
 
-# ✅ Serve media files in development mode only
+# 🖼 Serve media files during development
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,

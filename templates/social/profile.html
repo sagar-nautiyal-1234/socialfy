@@ -4,7 +4,12 @@
 {% block content %}
   <!-- Profile Card -->
   <div class="card profile-overview" style="text-align: center;">
-    <img src="{{ user_profile.profile.profile_pic.url }}" alt="Avatar"
+    <img src="{% if user_profile.profile.profile_pic and user_profile.profile.profile_pic.name != 'profile_pics/default.jpg' %}
+                {{ user_profile.profile.profile_pic.url }}
+              {% else %}
+                /media/profile_pics/default.jpg
+              {% endif %}"
+         alt="Avatar"
          style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc; margin-bottom: 1rem;" />
 
     <h2 class="profile-name">{{ user_profile.username }}</h2>

@@ -1,41 +1,70 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Socialfy{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% load static %}
+  
+  <!-- Styles and Scripts -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script src="{% static 'js/app.js' %}" defer></script>
+
+  <!-- Inline background style -->
+  <style>
+    body {
+      background-image: url("{{ MEDIA_URL }}background/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    /* Search bar styling */
+    #searchForm input[type="text"] {
+      width: 250px;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    /* Optional: Remove card background and shadow */
+    .card-container {
+      padding: 2rem;
+      border-radius: 0;
+      background-color: transparent;
+      box-shadow: none;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
-    <!-- ✅ Brand Name Centered on Mobile -->
     <div class="navbar-brand-container">
       <a href="{% url 'home' %}" class="navbar-brand">Socialfy</a>
     </div>
 
     {% if user.is_authenticated %}
-      <div class="navbar-links">
-        <!-- 🔍 Search & 👤 Profile Aligned Horizontally -->
-        <div class="navbar-user-group">
-          <div class="search-container">
-            <button id="toggleSearch" class="icon-button" aria-label="Search">🔍</button>
-            <form id="searchForm" action="{% url 'search_users' %}" method="get" style="display: none;">
-              <input type="text" name="q" placeholder="Search username…" required>
-              <button type="submit">Go</button>
-            </form>
+      {% if request.path != '/login/' and request.path != '/signup/' %}
+        <div class="navbar-links">
+          <div class="navbar-user-group">
+            <div class="search-container">
+              <button id="toggleSearch" class="icon-button" aria-label="Search">🔍</button>
+              <form id="searchForm" action="{% url 'search_users' %}" method="get" style="display: none;">
+                <input type="text" name="q" placeholder="Search username…" required>
+                <button type="submit">Go</button>
+              </form>
+            </div>
+
+            <a href="{% url 'profile' user.username %}" class="profile-link">
+              <img src="{{ user.profile.get_profile_pic_url }}" alt="{{ user.username }}">
+              <span>{{ user.username }}</span>
+            </a>
           </div>
-
-          <a href="{% url 'profile' user.username %}" class="profile-link">
-            <img src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
-            <span>{{ user.username }}</span>
-          </a>
+          <a href="{% url 'logout' %}" class="btn danger">Logout</a>
         </div>
-
-        <!-- 🔴 Logout -->
-        <a href="{% url 'logout' %}" class="btn danger">Logout</a>
-      </div>
+      {% endif %}
     {% else %}
       <div class="navbar-links">
         <a href="{% url 'login' %}" class="btn">Login</a>
