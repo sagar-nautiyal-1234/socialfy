@@ -73,11 +73,24 @@ def like_post(request, post_id):
 # ---------------------------- #
 # Signup View
 # ---------------------------- #
+# def signup(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             return redirect('home')
+#     else:
+#         form = UserCreationForm()
+#     return render(request, 'social/signup.html', {'form': form})
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Create profile for the new user
+            Profile.objects.create(user=user)
             login(request, user)
             return redirect('home')
     else:
